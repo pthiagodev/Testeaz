@@ -11,6 +11,7 @@ import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -35,29 +36,24 @@ public class UnidadeService {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Unidade> buscarPorId(@PathVariable @NotNull @Positive Long id) {
-        return unidadeBO.buscarPorId(id)
-            .map(unidade -> ResponseEntity.ok().body(unidade))
-            .orElse(ResponseEntity.notFound().build());
+    public Unidade buscarPorId(@PathVariable @NotNull @Positive Long id) {
+        return unidadeBO.buscarPorId(id);
     }
     
     @PostMapping
-    public ResponseEntity<Unidade> salvar(@RequestBody @Valid Unidade unidade) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(unidadeBO.salvar(unidade));
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public Unidade salvar(@RequestBody @Valid Unidade unidade) {
+        return unidadeBO.salvar(unidade);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Unidade> atualizar(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Unidade unidadeAtualizada) {
-        return unidadeBO.atualizar(id, unidadeAtualizada)
-            .map(unidade -> ResponseEntity.ok().body(unidade))
-            .orElse(ResponseEntity.notFound().build());
+    public Unidade atualizar(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Unidade unidadeAtualizada) {
+        return unidadeBO.atualizar(id, unidadeAtualizada);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable @NotNull @Positive Long id) {
-        if (unidadeBO.deletar(id)) {
-            return ResponseEntity.noContent().<Void>build();
-        }
-        return ResponseEntity.notFound().build();
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void deletar(@PathVariable @NotNull @Positive Long id) {
+        unidadeBO.deletar(id);
     }
 }

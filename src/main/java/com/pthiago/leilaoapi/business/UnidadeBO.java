@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import java.time.OffsetDateTime;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.pthiago.leilaoapi.entity.Unidade;
+import com.pthiago.leilaoapi.exception.RecordNotFoundException;
 import com.pthiago.leilaoapi.repository.UnidadeRepository;
 
 import lombok.AllArgsConstructor;
@@ -22,8 +22,8 @@ public class UnidadeBO {
         return unidadeRepository.findAll();
     }
 
-    public Optional<Unidade> buscarPorId(Long id) {
-        return unidadeRepository.findById(id);
+    public Unidade buscarPorId(Long id) {
+        return unidadeRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
     public Unidade salvar(Unidade unidade) {
@@ -31,23 +31,18 @@ public class UnidadeBO {
         return unidadeRepository.save(unidade);
     }
 
-    public Optional<Unidade> atualizar(Long id, Unidade unidadeAtualizada) {
+    public Unidade atualizar(Long id, Unidade unidadeAtualizada) {
         return unidadeRepository.findById(id)
             .map(unidadeSalva -> {
                 unidadeSalva.setName(unidadeAtualizada.getName());
                 unidadeSalva.setUpdatedAt(OffsetDateTime.now());
                 return unidadeRepository.save(unidadeSalva);
-            });
+            }).orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public boolean deletar(Long id) {
-
-        return unidadeRepository.findById(id)
-            .map(unidade -> {
-                unidadeRepository.delete(unidade);
-                return true;
-            })
-            .orElse(false);
+    public void deletar(Long id) {
+        unidadeRepository.delete(unidadeRepository.findById(id)
+            .orElseThrow(() -> new RecordNotFoundException(id)));
     }
 
 }
