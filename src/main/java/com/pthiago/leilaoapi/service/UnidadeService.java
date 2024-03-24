@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -41,5 +42,14 @@ public class UnidadeService {
     public ResponseEntity<Unidade> salvar(@RequestBody Unidade unidade) {
         return ResponseEntity.status(HttpStatus.CREATED).body(unidadeBO.salvar(unidade));
     }
-    
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Unidade> atualizar(@PathVariable Long id, @RequestBody Unidade unidadeAtualizada) {
+        return unidadeBO.buscarPorId(id)
+            .map(unidadeSalva -> {
+                Unidade unidade = unidadeBO.atualizar(unidadeSalva, unidadeAtualizada);
+                return ResponseEntity.ok().body(unidade);
+            })
+            .orElse(ResponseEntity.notFound().build());
+    }
 }
