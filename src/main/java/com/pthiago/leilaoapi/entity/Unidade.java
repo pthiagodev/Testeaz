@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +31,7 @@ public class Unidade extends BaseEntity {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @Column(name = "nome", length = 128)
+    @NotBlank
+    @Column(name = "nome", length = 128 )
     private String name;
 }
