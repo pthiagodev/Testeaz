@@ -37,4 +37,8 @@ public class UnidadeBO {
         return unidadeRepository.save(unidadeSalva);
     }
 
+    public void deletar(Unidade unidade) {
+        unidadeRepository.delete(unidade);
+    }
+
 }
