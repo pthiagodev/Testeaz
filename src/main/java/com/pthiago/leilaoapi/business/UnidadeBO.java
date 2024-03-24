@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.time.OffsetDateTime;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.pthiago.leilaoapi.entity.Unidade;
@@ -30,15 +31,23 @@ public class UnidadeBO {
         return unidadeRepository.save(unidade);
     }
 
-    public Unidade atualizar(Unidade unidadeSalva, Unidade unidadeAtualizada) {
-        unidadeSalva.setName(unidadeAtualizada.getName());
-        unidadeSalva.setUpdatedAt(OffsetDateTime.now());
-
-        return unidadeRepository.save(unidadeSalva);
+    public Optional<Unidade> atualizar(Long id, Unidade unidadeAtualizada) {
+        return unidadeRepository.findById(id)
+            .map(unidadeSalva -> {
+                unidadeSalva.setName(unidadeAtualizada.getName());
+                unidadeSalva.setUpdatedAt(OffsetDateTime.now());
+                return unidadeRepository.save(unidadeSalva);
+            });
     }
 
-    public void deletar(Unidade unidade) {
-        unidadeRepository.delete(unidade);
+    public boolean deletar(Long id) {
+
+        return unidadeRepository.findById(id)
+            .map(unidade -> {
+                unidadeRepository.delete(unidade);
+                return true;
+            })
+            .orElse(false);
     }
 
 }

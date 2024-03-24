@@ -48,22 +48,16 @@ public class UnidadeService {
 
     @PutMapping("/{id}")
     public ResponseEntity<Unidade> atualizar(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Unidade unidadeAtualizada) {
-        return unidadeBO.buscarPorId(id)
-            .map(unidadeSalva -> {
-                Unidade unidade = unidadeBO.atualizar(unidadeSalva, unidadeAtualizada);
-                return ResponseEntity.ok().body(unidade);
-            })
+        return unidadeBO.atualizar(id, unidadeAtualizada)
+            .map(unidade -> ResponseEntity.ok().body(unidade))
             .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable @NotNull @Positive Long id) {
-
-        return unidadeBO.buscarPorId(id)
-            .map(unidade -> {
-                unidadeBO.deletar(unidade);
-                return ResponseEntity.noContent().<Void>build();
-            })
-            .orElse(ResponseEntity.notFound().build());
+        if (unidadeBO.deletar(id)) {
+            return ResponseEntity.noContent().<Void>build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
