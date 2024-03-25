@@ -1,0 +1,38 @@
+<mat-toolbar color="primary">
+  <span class="fill-remaining-space">
+    <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+      <span (mouseleave)="menuTrigger.closeMenu()">
+        <button mat-menu-item>
+          <mat-icon>home</mat-icon>
+          <span>Inicio</span>
+        </button>
+
+        <button mat-menu-item>
+          <mat-icon>business</mat-icon>
+          <span>Empresas</span>
+        </button>
+
+        <button mat-menu-item>
+          <mat-icon>gavel</mat-icon>
+          <span>Leilões</span>
+        </button>
+
+        <button mat-menu-item>
+          <mat-icon>list_alt</mat-icon>
+          <span>Lotes</span>
+        </button>
+
+        <button mat-menu-item>
+          <mat-icon>filter_frames</mat-icon>
+          <span>Unidades</span>
+        </button>
+
+      </span>
+    </mat-menu>
+  </span>
+  <span class="fill-remaining-space">Leilão App</span>
+</mat-toolbar>
+<router-outlet></router-outlet>
