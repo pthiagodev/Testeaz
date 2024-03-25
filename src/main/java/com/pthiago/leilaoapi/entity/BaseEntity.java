@@ -1,12 +1,12 @@
 package com.pthiago.leilaoapi.entity;
 
+import java.io.Serializable;
+import java.time.OffsetDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import java.time.OffsetDateTime;
-
-import java.io.Serializable;
 
 @MappedSuperclass
 @Data
