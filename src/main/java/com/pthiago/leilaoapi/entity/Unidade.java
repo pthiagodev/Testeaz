@@ -31,7 +31,7 @@ public class Unidade extends BaseEntity {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Nome é obrigatório.")
     @Column(name = "nome", length = 128 )
     private String name;
 }

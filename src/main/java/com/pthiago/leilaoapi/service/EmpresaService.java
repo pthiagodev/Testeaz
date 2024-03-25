@@ -13,46 +13,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pthiago.leilaoapi.business.UnidadeBO;
-import com.pthiago.leilaoapi.entity.Unidade;
+import com.pthiago.leilaoapi.business.EmpresaBO;
+import com.pthiago.leilaoapi.entity.Empresa;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 
+
 @Validated
 @RestController
-@RequestMapping(value = "/unidade")
+@RequestMapping("/empresa")
 @AllArgsConstructor
-public class UnidadeService {
+public class EmpresaService {
 
-    private final UnidadeBO unidadeBO;
+    private final EmpresaBO empresaBO;
 
     @GetMapping
     public ResponseEntity<Object> buscarTodos() {
-        return new ResponseEntity<>(unidadeBO.buscarTodos(), HttpStatus.OK);
+        return new ResponseEntity<>(empresaBO.buscarTodos(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Unidade buscarPorId(@PathVariable @NotNull @Positive Long id) {
-        return unidadeBO.buscarPorId(id);
+    public Empresa buscarPorId(@PathVariable @NotNull @Positive Long id) {
+        return empresaBO.buscarPorId(id);
     }
     
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Unidade salvar(@RequestBody @Valid Unidade unidade) {
-        return unidadeBO.salvar(unidade);
+    public Empresa salvar(@RequestBody @Valid Empresa empresa) {
+        return empresaBO.salvar(empresa);
     }
 
     @PutMapping("/{id}")
-    public Unidade atualizar(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Unidade unidadeAtualizada) {
-        return unidadeBO.atualizar(id, unidadeAtualizada);
+    public Empresa atualizar(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Empresa empresaAtualizada) {
+        return empresaBO.atualizar(id, empresaAtualizada);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deletar(@PathVariable @NotNull @Positive Long id) {
-        unidadeBO.deletar(id);
+        empresaBO.deletar(id);
     }
 }
