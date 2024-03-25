@@ -29,7 +29,6 @@ import lombok.NoArgsConstructor;
 public class Empresa extends BaseEntity {
 
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_empresa")
     private Long id;
 
@@ -38,7 +37,6 @@ public class Empresa extends BaseEntity {
     @NotBlank(message = "Razão Social é obrigatória.")
     private String razaoSocial;
 
-    @Column(name = "cnpj")
     @NotBlank(message = "CNPJ é obrigatório.")
     private String cnpj;
 

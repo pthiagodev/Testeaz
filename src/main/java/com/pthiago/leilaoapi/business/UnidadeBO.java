@@ -34,7 +34,7 @@ public class UnidadeBO {
     public Unidade atualizar(Long id, Unidade unidadeAtualizada) {
         return unidadeRepository.findById(id)
             .map(unidadeSalva -> {
-                unidadeSalva.setName(unidadeAtualizada.getName());
+                unidadeSalva.setNome(unidadeAtualizada.getNome());
                 unidadeSalva.setUpdatedAt(OffsetDateTime.now());
                 return unidadeRepository.save(unidadeSalva);
             }).orElseThrow(() -> new RecordNotFoundException(id));

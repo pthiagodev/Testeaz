@@ -1,6 +1,7 @@
 package com.pthiago.leilaoapi.entity;
 
-import jakarta.persistence.Column;
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,12 +27,11 @@ import lombok.NoArgsConstructor;
 public class Unidade extends BaseEntity {
 
     @Id 
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_unidade")
     @EqualsAndHashCode.Include
     private Long id;
 
     @NotBlank(message = "Nome é obrigatório.")
-    @Column(name = "nome", length = 128 )
-    private String name;
+    @Length(max = 128)
+    private String nome;
 }
