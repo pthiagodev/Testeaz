@@ -1,7 +1,6 @@
 package com.pthiago.leilaoapi.entity;
 
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.br.CNPJ;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -40,7 +39,6 @@ public class Empresa extends BaseEntity {
     private String razaoSocial;
 
     @Column(name = "cnpj")
-    @CNPJ
     @NotBlank(message = "CNPJ é obrigatório.")
     private String cnpj;
 

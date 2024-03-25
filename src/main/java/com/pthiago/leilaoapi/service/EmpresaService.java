@@ -47,7 +47,7 @@ public class EmpresaService {
     }
 
     @PutMapping("/{id}")
-    public Empresa atualizar(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid Empresa empresaAtualizada) {
+    public Empresa atualizar(@PathVariable @Positive Long id, @RequestBody @Valid Empresa empresaAtualizada) {
         return empresaBO.atualizar(id, empresaAtualizada);
     }
 
