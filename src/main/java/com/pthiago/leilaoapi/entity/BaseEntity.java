@@ -12,6 +12,8 @@ import lombok.Data;
 @Data
 public abstract class BaseEntity implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Column(name = "created_at")
     @NotNull
     private OffsetDateTime createdAt;
