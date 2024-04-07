@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
-import { MatToolbarModule } from '@angular/material/toolbar';
 
+import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { Unidade } from './model/Unidade';
+
 
 @Component({
   selector: 'app-unidades',
   standalone: true,
-  imports: [MatCardModule, MatTableModule, MatToolbarModule],
+  imports: [AppMaterialModule],
   templateUrl: './unidades.component.html',
   styleUrl: './unidades.component.css'
 })

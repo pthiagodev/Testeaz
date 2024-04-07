@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterOutlet } from '@angular/router';
+
+import { AppMaterialModule } from './shared/app-material/app-material.module';
 import { UnidadesComponent } from './unidades/unidades.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, MatButtonModule, MatIconModule, MatMenuModule, MatToolbarModule, UnidadesComponent],
+  imports: [AppMaterialModule, RouterOutlet, UnidadesComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
