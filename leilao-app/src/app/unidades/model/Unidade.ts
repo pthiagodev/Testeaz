@@ -1,4 +1,4 @@
 export interface Unidade {
-  _id: number;
+  _id: string;
   nome: string;
 }
