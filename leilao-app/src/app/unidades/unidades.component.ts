@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { Unidade } from './model/Unidade';
+import { UnidadesService } from './services/unidades.service';
 
 
 @Component({
@@ -13,10 +15,10 @@ import { Unidade } from './model/Unidade';
 })
 
 export class UnidadesComponent {
-  unidades: Unidade[] = [
-    {_id: "1", nome: "Livro Clean Code", criadoEm: "07/04/2024 - 16:38:00", atualizadoEm: "07/04/2024 - 16:38:00"},
-    {_id: "2", nome: "Livro Angular 17", criadoEm: "07/04/2024 - 16:38:00", atualizadoEm: "07/04/2024 - 16:38:00"},
-    {_id: "3", nome: "Livro Spring Boot 3", criadoEm: "07/04/2024 - 16:38:00", atualizadoEm: "07/04/2024 - 16:38:00"}
-  ];
+  unidades: Observable<Unidade[]>;
   displayedColumns = ['numero', 'nome', 'criadoEm', 'atualizadoEm'];
+
+  constructor(private unidadesService: UnidadesService) {
+    this.unidades = this.unidadesService.listar();
+  }
 }

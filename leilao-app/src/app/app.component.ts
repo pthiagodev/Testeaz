@@ -7,7 +7,7 @@ import { UnidadesComponent } from './unidades/unidades.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [AppMaterialModule, RouterOutlet, UnidadesComponent],
+  imports: [AppMaterialModule, UnidadesComponent, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
