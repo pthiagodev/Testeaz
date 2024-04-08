@@ -8,11 +8,11 @@ import { Unidade } from '../model/Unidade';
 })
 export class UnidadesService {
 
-  private readonly API = "localhost:8080";
+  private readonly API = "api/unidade";
 
   constructor(private httpClient: HttpClient) { }
 
   listar() {
-    return this.httpClient.get<Unidade[]>(this.API + "/unidade");
+    return this.httpClient.get<Unidade[]>(this.API);
   }
 }
