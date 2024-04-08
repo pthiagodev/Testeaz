@@ -23,7 +23,7 @@ import lombok.AllArgsConstructor;
 
 @Validated
 @RestController
-@RequestMapping(value = "/unidade")
+@RequestMapping(value = "/api/unidade")
 @AllArgsConstructor
 public class UnidadeService {
 
